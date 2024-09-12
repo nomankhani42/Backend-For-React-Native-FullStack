@@ -28,7 +28,9 @@ async function main() {
   await mongoose.connect(process.env.mongo_Url);
   
 }
-
+app.use('/',(req,res)=>{
+  return res.send('Hello My Api is Runnig')
+})
 app.use('/api',Route)
 app.use('/api/category',CatRoute)
 app.use('/api/products',ProductRoute)
