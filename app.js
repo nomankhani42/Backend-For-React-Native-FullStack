@@ -17,19 +17,12 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 app.use(cors());
 
 // Connect to MongoDB
-async function main() {
-  try {
-    await mongoose.connect(process.env.mongo_Url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('DB connected');
-  } catch (err) {
-    console.error('DB connection error:', err);
-  }
-}
+main().then(()=>console.log('DB connected')).catch(err => console.log(err));
 
-main();
+async function main() {
+  await mongoose.connect(process.env.mongo_Url);
+  
+}
 
 // Routes
 app.use('/api', Route);
